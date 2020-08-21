@@ -1,0 +1,122 @@
+import React from 'react';
+
+import defaultNavOptions from './defaultNavOptions';
+
+import {createStackNavigator} from 'react-navigation-stack';
+import icons from '../assets/icons';
+import MenuBurger from '../navigation/MenuBurger';
+import CartClear from '../components/CartClear';
+
+import {Image, Platform, TouchableHighlight} from 'react-native';
+
+const isIos = Platform.OS === 'ios';
+
+import AuthScreen from '../screens/AuthScreen';
+import CartScreen from '../screens/CartScreen';
+import OrderScreen from '../screens/OrderScreen';
+
+import OrderShowScreen from '../screens/OrderShowScreen';
+import OrderItemsScreen from '../screens/OrderItemsScreen';
+import OrderIdentificationScreen from '../screens/OrderIdentificationScreen';
+
+import CommentScreen from '../screens/CommentScreen';
+import TextScreen from '../screens/TextScreen';
+
+export default createStackNavigator({
+  CartScreen: {
+    screen: CartScreen,
+    navigationOptions: ({navigation}) => ({
+      ...defaultNavOptions,
+      headerTitle: 'Корзина',
+      headerLeft: () => (isIos ? null : <MenuBurger navigation={navigation} />),
+      headerRight: () =>
+        navigation.state.params &&
+        navigation.state.params.cartItems &&
+        navigation.state.params.cartItems.length > 0 && <CartClear />,
+    }),
+  },
+  AuthScreen: {
+    screen: AuthScreen,
+    navigationOptions: {
+      ...defaultNavOptions,
+      headerTitle: 'Авторизация',
+    },
+  },
+  UserAgreement: {
+    screen: TextScreen,
+    navigationOptions: {
+      ...defaultNavOptions,
+      headerTitle: 'Пользовательского соглашение',
+    },
+  },
+  Order: {
+    screen: OrderScreen,
+    navigationOptions: ({navigation}) => ({
+      ...defaultNavOptions,
+      headerTitle: 'Оформление',
+      headerLeft: () => (
+        <TouchableHighlight
+          style={{marginLeft: 23}}
+          onPress={() => navigation.navigate('CartScreen')}>
+          <Image
+            source={isIos ? icons.icArrowBack : icons.icBackAndroid}
+            style={{width: isIos ? 11 : 18, height: 20}}
+          />
+        </TouchableHighlight>
+      ),
+    }),
+  },
+  OrderShow: {
+    screen: OrderShowScreen,
+    navigationOptions: ({navigation}) => ({
+      ...defaultNavOptions,
+      headerTitle: 'Заказ',
+      headerLeft: isIos ? null : (
+        <TouchableHighlight
+          style={{marginLeft: 23}}
+          onPress={() => navigation.navigate('CartScreen')}>
+          <Image source={icons.icArrowBack} style={{width: 11, height: 20}} />
+        </TouchableHighlight>
+      ),
+    }),
+  },
+  OrderItems: {
+    screen: OrderItemsScreen,
+    navigationOptions: {
+      ...defaultNavOptions,
+      headerTitle: 'Состав заказа',
+    },
+  },
+  OrderIdentification: {
+    screen: OrderIdentificationScreen,
+    navigationOptions: {
+      ...defaultNavOptions,
+      headerTitle: 'Идентификация упаковки',
+      headerLeft: () => isIos && null,
+    },
+  },
+  Comment: {
+    screen: CommentScreen,
+    navigationOptions: ({navigation}) => ({
+      ...defaultNavOptions,
+      headerTitle: 'Комментарий',
+      headerLeft: (
+        <TouchableHighlight
+          style={{marginLeft: 23}}
+          onPress={() => navigation.goBack(null)}>
+          <Image source={icons.icArrowBack} style={{width: 11, height: 20}} />
+        </TouchableHighlight>
+      ),
+      headerRight: () =>
+        navigation.state.params.canEditComment ? (
+          <TouchableHighlight
+            style={{marginRight: 25}}
+            activeOpacity={1}
+            underlayColor="transparent"
+            onPress={navigation.getParam('submit')}>
+            <Image source={icons.icSend} style={{width: 25, height: 25}} />
+          </TouchableHighlight>
+        ) : null,
+    }),
+  },
+});
