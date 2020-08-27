@@ -1,20 +1,19 @@
-import {GET_USER_DATA, UserInfo} from '../../types/userTypes';
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '../reducers';
-import {Action} from 'redux';
 import client from '../axiosSettinsg';
+import {GET_STREET_LIST, streetsTypes} from '../../types/streetsTypes';
 
-export const getUser = (): ThunkAction<
+export const getStreetsList = (): ThunkAction<
   void,
   RootState,
   unknown,
-  Action<string>
+  streetsTypes
 > => async (dispatch) => {
   try {
-    const user = await client.get<UserInfo>('/users');
+    const streets = await client.get('/streets');
     dispatch({
-      type: GET_USER_DATA,
-      payload: user,
+      type: GET_STREET_LIST,
+      payload: streets.data,
     });
   } catch (err) {
     console.log(err);

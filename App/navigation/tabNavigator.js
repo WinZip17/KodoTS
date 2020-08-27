@@ -6,7 +6,7 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 
 import HomeStack from './HomeStack';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import ProfileStack from './ProfileStack';
 import OrderStack from './OrderStack';
 import DeliveryScreen from '../screens/DeliveryScreen';

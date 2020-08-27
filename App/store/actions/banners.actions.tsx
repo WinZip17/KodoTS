@@ -1,20 +1,19 @@
-import {GET_USER_DATA, UserInfo} from '../../types/userTypes';
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '../reducers';
-import {Action} from 'redux';
 import client from '../axiosSettinsg';
+import {bannersTypes, GET_BANNERS_LIST} from '../../types/bannersTypes';
 
-export const getUser = (): ThunkAction<
+export const getBannersList = (): ThunkAction<
   void,
   RootState,
   unknown,
-  Action<string>
+  bannersTypes
 > => async (dispatch) => {
   try {
-    const user = await client.get<UserInfo>('/users');
+    const banners = await client.get('/banners');
     dispatch({
-      type: GET_USER_DATA,
-      payload: user,
+      type: GET_BANNERS_LIST,
+      payload: banners.data,
     });
   } catch (err) {
     console.log(err);

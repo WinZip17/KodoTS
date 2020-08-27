@@ -1,9 +1,9 @@
-import { StyleSheet } from 'react-native'
-import colors from './colors'
+import {StyleSheet} from 'react-native';
+import colors from './colors';
 
 const Input = StyleSheet.create({
   Placeholder: {
-    color: '#564145'
+    color: '#564145',
   },
   inputMain: {
     display: 'flex',
@@ -13,13 +13,13 @@ const Input = StyleSheet.create({
     fontSize: 17,
     padding: 0,
     paddingTop: 5,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   inputWidth: {
-    width: '27%'
+    width: '27%',
   },
   inputEror: {
-    borderBottomColor: '#ffff0000'
+    borderBottomColor: '#ffff0000',
   },
   inputArea: {
     textAlignVertical: 'top',
@@ -27,16 +27,16 @@ const Input = StyleSheet.create({
     fontSize: 17,
     padding: 15,
     height: 120,
-    justifyContent: "flex-start"
+    justifyContent: 'flex-start',
   },
   inputCover: {
     marginRight: 20,
     marginLeft: 21,
-    marginBottom: 10
+    marginBottom: 10,
   },
   inputText: {
-    textAlign: 'right'
-  }
+    textAlign: 'right',
+  },
 });
 
 export default Input;

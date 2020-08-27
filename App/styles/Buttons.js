@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native';
 
 const Buttons = StyleSheet.create({
   buttonMain: {
@@ -17,7 +17,7 @@ const Buttons = StyleSheet.create({
     color: '#000',
     textTransform: 'uppercase',
     textAlign: 'center',
-    width: '100%'
+    width: '100%',
   },
   buttonSecond: {
     borderWidth: 1,
@@ -36,7 +36,7 @@ const Buttons = StyleSheet.create({
     color: '#ffcc00',
     textTransform: 'uppercase',
     textAlign: 'center',
-    width: '100%'
+    width: '100%',
   },
 });
 

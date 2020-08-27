@@ -1,20 +1,19 @@
-import {GET_USER_DATA, UserInfo} from '../../types/userTypes';
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '../reducers';
-import {Action} from 'redux';
 import client from '../axiosSettinsg';
+import {GET_LAST_ORDER, ordersTypes} from '../../types/ordersTypes';
 
-export const getUser = (): ThunkAction<
+export const getLastOrder = (): ThunkAction<
   void,
   RootState,
   unknown,
-  Action<string>
+  ordersTypes
 > => async (dispatch) => {
   try {
-    const user = await client.get<UserInfo>('/users');
+    const order = await client.get('orders/last_order');
     dispatch({
-      type: GET_USER_DATA,
-      payload: user,
+      type: GET_LAST_ORDER,
+      payload: order.data,
     });
   } catch (err) {
     console.log(err);

@@ -1,20 +1,19 @@
-import {GET_USER_DATA, UserInfo} from '../../types/userTypes';
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '../reducers';
-import {Action} from 'redux';
 import client from '../axiosSettinsg';
+import {GET_LABELS_LIST, labelsTypes} from '../../types/labelsTypes';
 
-export const getUser = (): ThunkAction<
+export const getLabelsList = (): ThunkAction<
   void,
   RootState,
   unknown,
-  Action<string>
+  labelsTypes
 > => async (dispatch) => {
   try {
-    const user = await client.get<UserInfo>('/users');
+    const labels = await client.get('/labels');
     dispatch({
-      type: GET_USER_DATA,
-      payload: user,
+      type: GET_LABELS_LIST,
+      payload: labels.data,
     });
   } catch (err) {
     console.log(err);

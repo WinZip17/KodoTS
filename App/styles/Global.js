@@ -1,12 +1,12 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
-import colors from '~/styles/colors';
+import colors from '../styles/colors';
 
-const styles = StyleSheet.create({
+const GlobalStyles = StyleSheet.create({
   background: {
     backgroundColor: colors.background,
     flex: 1,
   },
 });
 
-export default styles;
+export default GlobalStyles;

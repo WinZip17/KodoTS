@@ -4,11 +4,10 @@ import store from './store/store';
 import Main from './Main';
 
 const App: React.FC = (): JSX.Element => {
-
   return (
-    <>
-      <Provider store={store}><Main/></Provider>
-    </>
+    <Provider store={store}>
+      <Main />
+    </Provider>
   );
 };
 

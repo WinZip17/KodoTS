@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MenuBurger = ({navigation}) => {
+const MenuBurger: React.FC = ({navigation}: any): JSX.Element => {
   return (
     <View style={styles.block}>
       <TouchableWithoutFeedback

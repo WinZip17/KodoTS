@@ -4,7 +4,7 @@ import defaultNavOptions from './defaultNavOptions';
 
 import {createStackNavigator} from 'react-navigation-stack';
 import icons from '../assets/icons';
-import MenuBurger from '../navigation/MenuBurger';
+import MenuBurger from './MenuBurger';
 import CartClear from '../components/CartClear';
 
 import {Image, Platform, TouchableHighlight} from 'react-native';

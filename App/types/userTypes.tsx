@@ -1,6 +1,6 @@
 export const GET_USER_DATA = '[USER] GET_USER_DATA';
 
-interface UserInfo {
+export interface UserInfo {
   avatar_type: string | null;
   birthday: string | null;
   code_confirmed: string | null;
