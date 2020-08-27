@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Text, StyleSheet, View, ScrollView, Platform} from 'react-native';
 import GlobalStyles from '../../styles/Global';
-import { categoriesInfo, itemMenuInfo } from '../../types/menuListTypes';
+import {categoriesInfo} from '../../types/menuListTypes';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/reducers';
 import * as Actions from '../../store/actions/';
-import Banners from '../../components/Banners';
+import Index from '../../components/Banners';
 import CategoryList from '../../components/CategoryList';
-// import throttle from 'lodash-es/throttle';
 import filter from 'lodash-es/filter';
 import matches from 'lodash-es/matches';
 import GeneralStatusBarColor from '../../components/StatusBar';
@@ -41,10 +40,10 @@ const HomeScreen = () => {
   let sorted;
 
   let catOffsets: any = {};
-  let bannersHeight = 200;
+  // let bannersHeight = 200;
   const [activePressCategory, setActivePressCategory] = useState<number | null>(null);
-  const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
-  const [statusBarOff, setStatusBarOff] = useState(false);
+  // const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
+  // const [statusBarOff, setStatusBarOff] = useState(false);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -61,13 +60,13 @@ const HomeScreen = () => {
   const scrollTo = (cat: categoriesInfo) => {
     const edditionaloffset = 59;
     let offset = getOffset(cat) - edditionaloffset;
-    activePressCategory = cat.id;
+    setActivePressCategory(cat.id);
     dispatch(Actions.selectActiveCategory(categories[0].id));
     scrollViewRef.current &&
       scrollViewRef.current.scrollTo({x: 0, y: offset, animated: true});
   };
 
-  const handleBannerHeight = (height: number) => {};
+  const handleBannerHeight = () => {};
 
   return (
     <View style={GlobalStyles.background}>
@@ -78,7 +77,7 @@ const HomeScreen = () => {
           ref={scrollViewRef}
           // onScroll={() => handleScroll()}
         >
-          <Banners handleBannerHeight={handleBannerHeight} />
+          <Index handleBannerHeight={handleBannerHeight} />
           <CategoryList
             onChange={scrollTo}
             activeCategoryId={activeCategory}

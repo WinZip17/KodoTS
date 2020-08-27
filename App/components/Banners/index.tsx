@@ -1,41 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, Dimensions} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {useSelector} from 'react-redux';
-import FastImage from 'react-native-fast-image';
-import {RootState} from '../store/reducers';
-import {banner} from '../types/bannersTypes';
-
-const styles = StyleSheet.create({
-  imageBackground: {
-    height: 160,
-    position: 'relative',
-    opacity: 0.55,
-  },
-  swiper: {
-    margin: 20,
-    alignItems: 'center',
-    flex: 1,
-  },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    position: 'absolute',
-    bottom: 20,
-    color: '#fff',
-    fontSize: 20,
-    left: 15,
-    fontWeight: 'bold',
-    width: 200,
-  },
-  slider: {
-    marginTop: 15,
-    height: 200,
-  },
-});
+import {RootState} from '../../store/reducers';
+import {banner} from '../../types/bannersTypes';
+import {styles} from './banners.styles';
+import BannersItem from './BannersItem';
 
 type PropsType = {handleBannerHeight: (height: number) => void};
 
@@ -50,19 +20,6 @@ const Banners = (props: PropsType) => {
 
   const {handleBannerHeight} = props;
 
-  const renderItem = (item: banner): JSX.Element  => {
-    return (
-      <View>
-        <FastImage
-          key={item.id}
-          style={[styles.imageBackground, {borderRadius: 13}]}
-          source={{uri: item.image}}
-        />
-        <Text style={styles.text}>{item.name}</Text>
-      </View>
-    );
-  };
-
   const renderCarousel = () => {
     if (!banners || bannersLoading) {
       return <Text>Загрузка</Text>;
@@ -74,9 +31,9 @@ const Banners = (props: PropsType) => {
         autoplayDelay={0}
         autoplayInterval={5000}
         data={banners}
-        renderItem={(item: {item: banner; index: number}) =>
-          renderItem(item.item)
-        }
+        renderItem={(item: {item: banner}): JSX.Element => (
+          <BannersItem item={item.item} />
+        )}
         sliderWidth={width}
         itemWidth={width - 15}
         onSnapToItem={(index: number) => {
@@ -85,8 +42,6 @@ const Banners = (props: PropsType) => {
         loop={true}
         enableSnap={true}
         loopClonesPerSide={banners.length}
-        enableMomentum={true}
-        lockScrollWhileSnapping={true}
       />
     );
   };
@@ -100,19 +55,9 @@ const Banners = (props: PropsType) => {
       <Pagination
         dotsLength={banners.length}
         activeDotIndex={activeSlide}
-        containerStyle={{
-          marginTop: -15,
-          marginBottom: -15,
-        }}
-        dotStyle={{
-          width: 8,
-          height: 8,
-          borderRadius: 4,
-          backgroundColor: 'rgba(255, 255, 255, 1)',
-        }}
-        inactiveDotStyle={{
-          backgroundColor: 'rgba(255, 255, 255, 0.45)',
-        }}
+        containerStyle={styles.paginationContainerStyle}
+        dotStyle={styles.paginationDotStyle}
+        inactiveDotStyle={styles.paginationInactiveDotStyle}
         inactiveDotScale={1}
       />
     );

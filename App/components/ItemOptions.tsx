@@ -181,10 +181,9 @@ const ItemOptions = () => {
     (state: RootState) => state.cartModal.showEdit || state.cartModal.showAdd,
   );
   const showAdd = useSelector((state: RootState) => state.cartModal.showAdd);
-  const cartId = 0
-  // const cartId = useSelector(
-  //   (state: RootState) => state.cartModal.cartId || cartItems[0].id || 0,
-  // );
+  const cartId = useSelector(
+    (state: RootState) => state.cartModal.cartId || cartItems.length > 0 ? cartItems[0].id : 0,
+  );
   const item = useSelector((state: RootState) => state.cartModal.item);
   const isEdit = useSelector((state: RootState) => state.cartModal.showEdit);
 

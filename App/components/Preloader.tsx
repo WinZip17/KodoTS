@@ -25,30 +25,35 @@ const styles = StyleSheet.create({
 
 const Preloader = (): JSX.Element => {
   const animation = useRef(new Animated.Value(0)).current;
-  useEffect(() => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(animation, {
-          toValue: 6.28,
-          duration: 1200,
-          useNativeDriver: false,
-          delay: 800,
-        }),
-        Animated.timing(animation, {
-          toValue: 0,
-          duration: 1200,
-          useNativeDriver: false,
-          delay: 800,
-        }),
-      ]),
-      {iterations: 10},
-    ).start();
-  }, []);
+
+  let rotateProp = animation.interpolate({
+    inputRange: [5, 10],
+    outputRange: ['0deg', '360deg'],
+  })
+
+  // useEffect(() => {
+  //   Animated.loop(
+  //     Animated.sequence([
+  //       Animated.timing(animation, {
+  //         toValue: 6.28,
+  //         duration: 1200,
+  //         useNativeDriver: true,
+  //         delay: 800,
+  //       }),
+  //       Animated.timing(animation, {
+  //         toValue: 0,
+  //         duration: 1200,
+  //         useNativeDriver: true,
+  //         delay: 800,
+  //       }),
+  //     ]),
+  //     {iterations: 10},
+  //   ).start();
+  // }, []);
   return (
     <View style={styles.wrapper}>
       <Animated.View
-        //style={{transform: [{rotate: animation}, {perspective: 1000}]}}
-      >
+        style={{transform: [{rotate: rotateProp}, {perspective: 1000}]}}>
         <Image style={styles.spinner} source={icons.icSpinner} />
       </Animated.View>
     </View>

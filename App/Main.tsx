@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import ErrorBoundary from './components/ErrorBoundary';
 import NavigationContainer from './navigation/Container';
 import * as Actions from './store/actions';
@@ -20,7 +20,7 @@ const Main: React.FC = (): JSX.Element => {
     dispatch(Actions.getSettings());
     dispatch(Actions.getLabelsList());
     dispatch(Actions.getStreetsList());
-    // dispatch(Actions.getLastOrder());
+    dispatch(Actions.getLastOrder());
   }, []);
 
   return (
