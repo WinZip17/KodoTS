@@ -1,4 +1,4 @@
-export const GET_SETTINGS = '[SETTINGS] GET_SETTINGS';
+import { GET_SETTINGS } from "../store/reducers/settings";
 
 export interface settingsState {
   loading: boolean;

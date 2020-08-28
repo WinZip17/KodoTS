@@ -3,17 +3,8 @@ import {
   TypedUseSelectorHook,
 } from 'react-redux';
 import {RootState} from '../store/reducers';
+import { ADD_CART_DATA, CART_CLEAR, DELETE_CART_DATA, EDIT_ITEM_COUNT_CART, SET_CART_COUNT, SET_CART_DATA, SET_ITEMS } from '../store/reducers/cart';
 import {itemMenuInfo, optionsItem} from './menuListTypes';
-
-export const SET_CART_DATA = '[CART] SET_CART_DATA';
-export const ADD_CART_DATA = '[CART] ADD_CART_DATA';
-export const DELETE_CART_DATA = '[CART] DELETE_CART_DATA';
-export const SET_CART_COUNT = '[CART] SET_CART_COUNT';
-export const EDIT_ITEM_COUNT_CART = '[CART] EDIT_ITEM_COUNT_CART';
-export const SET_ITEMS = '[CART] SET_ITEMS';
-export const CART_CLEAR = '[CART] CART_CLEAR';
-
-export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
 export interface cartInfoType {
   id: number;

@@ -1,10 +1,5 @@
 import {itemMenuInfo} from './menuListTypes';
-
-export const SHOW_ADD_CART_MODAL = '[CART_MODEL] SHOW_ADD_CART_MODAL';
-export const SHOW_CLEAR_CART_MODAL = '[CART_MODEL] SHOW_CLEAR_CART_MODAL';
-export const HIDE_CLEAR_CART_MODAL = '[CART_MODEL] HIDE_CLEAR_CART_MODAL';
-export const SHOW_EDIT_CART_MODAL = '[CART_MODEL] SHOW_EDIT_CART_MODAL';
-export const HIDE_MODAL_CART_MODAL = '[CART_MODEL] HIDE_MODAL_CART_MODAL';
+import { HIDE_CLEAR_CART_MODAL, HIDE_MODAL_CART_MODAL, SHOW_ADD_CART_MODAL, SHOW_CLEAR_CART_MODAL, SHOW_EDIT_CART_MODAL } from "../store/reducers/cartModal";
 
 export interface cartModalState {
   item: null | itemMenuInfo;

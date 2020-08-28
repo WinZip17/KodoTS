@@ -1,4 +1,4 @@
-export const GET_STREET_LIST = '[STREET] GET_STREET_LIST';
+import { GET_STREET_LIST } from "../store/reducers/streets";
 
 export interface streetsState {
   streets: street[];

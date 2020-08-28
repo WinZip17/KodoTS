@@ -1,4 +1,4 @@
-export const GET_USER_DATA = '[USER] GET_USER_DATA';
+import { GET_USER_DATA } from "../store/reducers/user";
 
 export interface UserInfo {
   avatar_type: string | null;

@@ -1,6 +1,5 @@
+import { GET_LAST_ORDER } from '../store/reducers/orders';
 import {itemMenuInfo} from './menuListTypes';
-
-export const GET_LAST_ORDER = '[ORDER] GET_LAST_ORDER';
 
 export interface ordersState {
   order: {

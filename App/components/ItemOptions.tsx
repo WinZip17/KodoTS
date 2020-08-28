@@ -17,7 +17,7 @@ import icons from '../assets/icons';
 import Colors from '../styles/colors';
 import Buttons from '../styles/Buttons';
 
-import * as Actions from '../store/actions/';
+import * as Actions from '../store/reducers/Actions';
 
 import RadioButton from './RadioButton';
 

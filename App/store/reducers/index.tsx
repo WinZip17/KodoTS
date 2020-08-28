@@ -1,14 +1,14 @@
 import {combineReducers} from 'redux';
-import user from './user.reducer';
-import cart from './cart.reducer';
-import menuList from './menuList.reducer';
-import textBlocks from './textBlocks.reducer';
-import banners from './banners.reducer';
-import settings from './settings.reducer';
-import labels from './labels.reducer';
-import streets from './streets.reducer';
-import order from './order.reducer';
-import cartModal from './cartModal.reducer';
+import user from './user';
+import cart from './cart';
+import menuList from './menuList';
+import textBlocks from './textBlock';
+import banners from './banners';
+import settings from './settings';
+import labels from './labels';
+import streets from './streets';
+import order from './orders';
+import cartModal from './cartModal';
 
 const reducers = combineReducers({
   cart,

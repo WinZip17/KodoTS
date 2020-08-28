@@ -1,4 +1,4 @@
-export const GET_BANNERS_LIST = '[BANNERS] GET_BANNERS_LIST';
+import {GET_BANNERS_LIST} from "../store/reducers/banners";
 
 export interface bannersState {
   banners: banner[];

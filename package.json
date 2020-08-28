@@ -20,7 +20,7 @@
     "lodash-es": "^4.17.15",
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "react-native-fast-image": "^8.3.2",
+    "react-native-fast-image": "doomsower/react-native-fast-image#preload_callbacks",
     "react-native-flash-message": "^0.1.16",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-modal": "^11.5.6",

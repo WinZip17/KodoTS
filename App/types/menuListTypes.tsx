@@ -1,6 +1,4 @@
-export const GET_ITEMS = '[ITEMS] GET_ITEMS';
-export const GET_CATEGORIES = '[ITEMS] GET_CATEGORIES';
-export const CHANGE_ACTIVE_CATEGORY = '[ITEMS] CHANGE_ACTIVE_CATEGORY';
+import { CHANGE_ACTIVE_CATEGORY, GET_CATEGORIES, GET_ITEMS } from "../store/reducers/menuList";
 
 interface valueOptionsItem {
   name: string;

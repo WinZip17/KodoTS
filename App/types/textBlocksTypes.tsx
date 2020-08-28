@@ -1,4 +1,4 @@
-export const GET_TEXT_LIST = '[TEXT] GET_TEXT_LIST';
+import { GET_TEXT_LIST } from "../store/reducers/textBlock";
 
 export interface TextBlocksState {
   loading: boolean;

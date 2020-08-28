@@ -1,4 +1,4 @@
-export const GET_LABELS_LIST = '[LABELS] GET_LABELS_LIST';
+import { GET_LABELS_LIST } from "../store/reducers/labels";
 
 export interface labelsState {
   labels: {

@@ -5,7 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {Platform} from 'react-native';
 const isIos = Platform.OS === 'ios';
 
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 import MenuBurger from './MenuBurger';
 import MenuAndroidCart from './MenuAndroidCart';
 
