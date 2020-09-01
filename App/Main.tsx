@@ -1,11 +1,11 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import ErrorBoundary from './components/ErrorBoundary';
-import NavigationContainer from './navigation/Container';
-import * as Actions from './store/reducers/Actions';
+import ErrorBoundary from './Components/ErrorBoundary';
+import NavigationContainer from './Navigation/Container';
+import * as Actions from './Stores/reducers/Actions';
 import {Text} from 'react-native';
-import {categoriesInfo, itemMenuInfo} from './types/menuListTypes';
-import {banner} from './types/bannersTypes';
+import {categoriesInfo, itemMenuInfo} from './Types/menuListTypes';
+import {banner} from './Types/bannersTypes';
 import FastImage from 'react-native-fast-image';
 
 const Main: React.FC = (): JSX.Element => {
