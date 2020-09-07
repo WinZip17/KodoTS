@@ -14,6 +14,7 @@ export interface UserInfo {
   sex: string | null;
   sms_code: string | null;
   updated_at: string | null;
+  first_order: boolean | null;
 }
 
 export interface UserState {

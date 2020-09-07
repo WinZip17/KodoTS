@@ -1,26 +1,36 @@
-import { GET_LAST_ORDER } from '../Stores/reducers/orders';
+import { GET_LAST_ORDER, SET_ADDRESS } from '../Stores/reducers/orders';
 import {itemMenuInfo} from './menuListTypes';
+import { addressType } from "./addressesTypes";
 
 export interface ordersState {
   order: {
-    data: order | null;
+    data: orderType | null;
     loading: boolean;
   };
   history: {
     loading: boolean;
-    data: order[] | null;
+    data: orderType[] | null;
   };
   duration: {
     loading: boolean;
     data: number | null;
   };
-  lastOrder: order | null;
-  address: {
-    street_name: string;
-    building: string;
-    house: string;
-    flat: string;
-  };
+  lastOrder: orderType | null;
+  address: addressType;
+}
+
+export interface tempOrderTypes {
+  people: number;
+  payment: string;
+  contactless?: boolean;
+  delivery_option: string;
+  address_id: string;
+  address: addressType | null;
+  ready_time: Date;
+  change_from?: string;
+  comment: string;
+  delivery: string;
+  line_items: itemsForOrderType[];
 }
 
 interface itemsForOrderType {
@@ -35,7 +45,7 @@ interface itemsForOrderType {
   values: any[];
 }
 
-interface order {
+export interface orderType {
   address: string | null;
   address_lat: string | null;
   address_lng: string | null;
@@ -66,7 +76,12 @@ interface order {
 
 export interface getLastOrder {
   type: typeof GET_LAST_ORDER;
-  payload: order | null;
+  payload: orderType | null;
+}
+
+export interface setNewAddressSave {
+  type: typeof SET_ADDRESS;
+  payload: orderType | null;
 }
 
 export type ordersTypes = getLastOrder;

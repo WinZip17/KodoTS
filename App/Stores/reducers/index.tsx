@@ -9,6 +9,7 @@ import labels from './labels';
 import streets from './streets';
 import order from './orders';
 import cartModal from './cartModal';
+import addresses from './address';
 
 const reducers = combineReducers({
   cart,
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   streets,
   order,
   cartModal,
+  addresses,
 });
 
 export default reducers;

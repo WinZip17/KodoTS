@@ -6,50 +6,48 @@ import {
   TouchableOpacity,
   StyleProp,
   ViewStyle,
+  TextStyle,
 } from 'react-native';
 
 const styles = StyleSheet.create({
-  circleOuter: {
+  checkboxOuter: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: 30,
     height: 30,
-    borderRadius: 30,
     borderWidth: 1,
     borderColor: '#fff',
     borderStyle: 'solid',
+    borderRadius: 50,
   },
-  circleOuterCheck: {
+  checkboxOuterCheck: {
     borderColor: '#ffcc00',
   },
-  circleInner: {
+  checkboxInner: {
     width: 10,
     height: 10,
-    borderRadius: 10,
     backgroundColor: '#ffcc00',
+    borderRadius: 50,
   },
 });
 
-type PropsTypes = {
-  children?: React.ReactNode;
-  data: {
-    text: string | number;
-    value: string | number;
-  };
-  valueState: string | number;
+type propsTypes = {
+  text: string;
+  valueState: boolean;
+  CheckboxWrap?: StyleProp<ViewStyle>;
   viewStyle?: StyleProp<ViewStyle>;
-  RadioButtonWrap: StyleProp<ViewStyle>;
-  onChange: (val: string | number) => void;
-  orientation?: any;
+  orientation?: StyleProp<TextStyle>;
+  onChange: (value: boolean) => void;
+  children?: React.ReactNode;
 };
 
-const RadioButton = (props: PropsTypes): JSX.Element => {
+const Checkbox = (props: propsTypes) => {
   const {
-    data,
+    text,
     valueState,
     viewStyle,
-    RadioButtonWrap,
+    CheckboxWrap,
     onChange,
     orientation,
   } = props;
@@ -58,17 +56,17 @@ const RadioButton = (props: PropsTypes): JSX.Element => {
     <View>
       <TouchableOpacity
         onPress={() => {
-          onChange(data.value);
+          onChange(!valueState);
         }}>
-        <View style={[RadioButtonWrap, viewStyle]}>
+        <View style={[CheckboxWrap, viewStyle]}>
           <View
             style={[
-              styles.circleOuter,
-              data.value === valueState && styles.circleOuterCheck,
+              styles.checkboxOuter,
+              valueState && styles.checkboxOuterCheck,
             ]}>
-            {data.value === valueState && <View style={styles.circleInner} />}
+            {valueState && <View style={styles.checkboxInner} />}
           </View>
-          <Text style={data.text ? orientation : ''}>{data.text}</Text>
+          {text && <Text style={orientation}>{text}</Text>}
           {props.children}
         </View>
       </TouchableOpacity>
@@ -76,4 +74,4 @@ const RadioButton = (props: PropsTypes): JSX.Element => {
   );
 };
 
-export default RadioButton;
+export default Checkbox;

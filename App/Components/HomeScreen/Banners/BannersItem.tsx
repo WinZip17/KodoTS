@@ -10,11 +10,12 @@ type PropsTypes = {
 
 const BannersItem = ({item}: PropsTypes): JSX.Element => {
   return (
-    <View>
+    <View style={{flex: 1}}>
       <FastImage
         key={item.id}
         style={styles.imageBackground}
         source={{uri: item.image}}
+        resizeMode={FastImage.resizeMode.contain}
       />
       <Text style={styles.text}>{item.name}</Text>
     </View>

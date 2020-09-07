@@ -1,10 +1,13 @@
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '.';
-import {ordersState, ordersTypes} from '../../Types/ordersTypes';
+import { ordersState, ordersTypes, orderType, tempOrderTypes } from '../../Types/ordersTypes';
 import client from '../../Services/axiosSettinsg';
+import {SAVE_ADDRESS} from './address';
+import { AddressActionTypes, addressType } from '../../Types/addressesTypes';
 
 // Actions
 export const GET_LAST_ORDER = 'KodoTS/reducer/GET_LAST_ORDER';
+export const SET_ADDRESS = 'KodoTS/reducer/SET_ADDRESS';
 
 // Reducer
 const initialState: ordersState = {
@@ -26,14 +29,25 @@ const initialState: ordersState = {
     building: '',
     house: '',
     flat: '',
+    id: 0,
+    full: '',
   },
 };
-export default function orderReducer(state = initialState, action: ordersTypes) {
+
+export default function orderReducer(
+  state = initialState,
+  action: ordersTypes | AddressActionTypes,
+) {
   switch (action.type) {
     case GET_LAST_ORDER:
       return {
         ...state,
         lastOrder: action.payload,
+      };
+    case SAVE_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
       };
     default:
       return state;
@@ -58,3 +72,26 @@ export const getLastOrder = (): ThunkAction<
     console.log(err);
   }
 };
+
+export const createOrder = async (order: tempOrderTypes) => {
+  try {
+    const newOrder = await client.post('orders', order);
+    return newOrder.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const setNewAddressSave = (address: addressType) => {
+  return {
+    type: SET_ADDRESS,
+    payload: {
+      street_name: address.street_name || '',
+      house: address.house || '',
+      building: address.building || '',
+      flat: address.flat || '',
+      id: 0,
+      full: '',
+    }
+  }
+}

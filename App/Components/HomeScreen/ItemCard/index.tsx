@@ -40,13 +40,11 @@ const ItemCard = (props: PropsType) => {
 
   return (
     <ListItem style={styles.listItem}>
-      {!item.options.length && (
-        <ItemCounter
-          handleSingleTap={handleSingleTap}
-          cartItems={cartItems}
-          item={item}
-        />
-      )}
+      <ItemCounter
+        handleSingleTap={handleSingleTap}
+        cartItems={cartItems}
+        item={item}
+      />
       <TouchableOpacity
         activeOpacity={1}
         onPress={handleSingleTap}

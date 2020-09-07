@@ -1,17 +1,17 @@
 import { GET_STREET_LIST } from "../Stores/reducers/streets";
 
 export interface streetsState {
-  streets: street[];
+  streets: streetTypes[];
 }
 
-interface street {
+export interface streetTypes {
   name: string;
   id: number;
 }
 
 export interface getStreetsList {
   type: typeof GET_STREET_LIST;
-  payload: street[];
+  payload: streetTypes[];
 }
 
 export type streetsTypes = getStreetsList;

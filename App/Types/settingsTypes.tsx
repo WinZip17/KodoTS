@@ -2,10 +2,10 @@ import { GET_SETTINGS } from "../Stores/reducers/settings";
 
 export interface settingsState {
   loading: boolean;
-  settings: settings;
+  settings: settingsType;
 }
 
-interface settings {
+export interface settingsType {
   courier_phone_clean: string;
   courier_phone_fmt: string;
   delivery_zones: number[][][];
@@ -24,7 +24,7 @@ interface settings {
 
 export interface getSettings {
   type: typeof GET_SETTINGS;
-  payload: settings;
+  payload: settingsType;
 }
 
 export type settingsTypes = getSettings;

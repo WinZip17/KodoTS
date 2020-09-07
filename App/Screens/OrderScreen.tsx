@@ -1,12 +1,10 @@
 import React from 'react';
-import {Text} from 'react-native';
+import OrderScreenComponent from '../Components/OrderScreen';
 
 const OrderScreen: React.FC = (): JSX.Element => {
   return (
     <>
-      <Text>
-          OrderScreen.
-      </Text>
+      <OrderScreenComponent />
     </>
   );
 };

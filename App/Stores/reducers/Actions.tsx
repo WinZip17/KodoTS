@@ -8,3 +8,4 @@ export * from './streets';
 export * from './orders';
 export * from './cart';
 export * from './cartModal';
+export * from './address';

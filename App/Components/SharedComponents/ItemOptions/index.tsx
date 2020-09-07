@@ -29,7 +29,7 @@ import RenderItemOptionsList from './RenderItemOptionsList';
 
 const ItemOptions = () => {
   const dispatch = useDispatch();
-  //переменная для определения cartItems, иначе ts на возможный null ругается
+  //переменная для определения cartItems, иначе ts ругается на возможный null
   const defaultId = useSelector((state: RootState) =>
     state.cartModal.item ? state.cartModal.item.id : 1,
   );

@@ -7,7 +7,7 @@ import {styles} from './ItemCard.styles';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import icons from '../../../assets/icons';
 import React, {useState} from 'react';
-import ConfirmModal from './ConfirmModal';
+import ConfirmModal from '../../SharedComponents/ConfirmModal';
 import each from 'lodash-es/each';
 import {itemMenuInfo} from '../../../Types/menuListTypes';
 import {useDispatch} from 'react-redux';

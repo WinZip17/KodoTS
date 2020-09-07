@@ -4,10 +4,10 @@ import Modal from 'react-native-modal';
 
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-import colors from '../../../Theme/colors';
+import colors from '../../Theme/colors';
 
-import ListItem from '../../ListItem';
-import { styles } from "./ItemCard.styles";
+import ListItem from '../ListItem';
+import { styles } from "../HomeScreen/ItemCard/ItemCard.styles";
 
 
 type PropsTypes = {

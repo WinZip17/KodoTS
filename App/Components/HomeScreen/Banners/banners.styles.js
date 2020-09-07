@@ -3,7 +3,8 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   imageBackground: {
     minHeight: 140,
-    maxHeight: 160,
+    position: 'relative',
+    //maxHeight: 160,
     opacity: 1,
     borderRadius: 13,
   },
