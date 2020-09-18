@@ -4,6 +4,13 @@ import reducers from './reducers/';
 
 export type Store = ReduxStore;
 
-const store: Store = createStore(reducers, applyMiddleware(thunkMiddleware));
+const middlewares = [thunkMiddleware];
+
+if (__DEV__) {
+  const createDebugger = require('redux-flipper').default;
+  middlewares.push(createDebugger());
+}
+
+const store: Store = createStore(reducers, applyMiddleware(...middlewares));
 
 export default store;

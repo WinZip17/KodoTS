@@ -1,14 +1,30 @@
-import React from "react";
-import { ScrollView } from "react-native";
-import { styles } from "./cartScreen.styles";
+import React, { useState } from 'react';
+import { Platform, ScrollView, View } from 'react-native';
+import CartClearModal from './CartClearModal';
+import {styles} from './cartScreen.styles';
+import {SwipeListView, SwipeRow} from 'react-native-swipe-list-view';
+import { useSelector } from "react-redux";
+import { RootState } from "../../Stores/reducers";
+import map from 'lodash-es/map';
+import property from 'lodash-es/property';
 
+const isIos = Platform.OS === 'ios';
 
 const CartScreenComponent: React.FC = (): JSX.Element => {
 
+  const [borderRadius, setBorderRadius] = useState(isIos ? 8 : 4);
+  const cart = useSelector((state: RootState) => state.cart);
+  const items = useSelector((state: RootState) => state.cart.items);
+  const user = useSelector((state: RootState) => state.user.user);
+  const settings = useSelector((state: RootState) => state.settings.settings);
+  const lastOrder = useSelector((state: RootState) => state.order.lastOrder);
+  const allItemIds = useSelector((state: RootState) =>
+    map(state.menuList.items, property('id')),
+  );
 
   return (
     <ScrollView style={styles.productMain}>
-      {/*<CartClearModal />*/}
+      <CartClearModal />
       {/*<SwipeListView*/}
       {/*  useFlatList*/}
       {/*  data={this.props.items}*/}
@@ -93,7 +109,7 @@ const CartScreenComponent: React.FC = (): JSX.Element => {
       {/*  <Text style={styles.productBuy}>Оформить</Text>*/}
       {/*</TouchableOpacity>*/}
     </ScrollView>
-  )
-}
+  );
+};
 
-export default CartScreenComponent
+export default CartScreenComponent;

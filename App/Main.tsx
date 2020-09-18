@@ -8,6 +8,12 @@ import {categoriesInfo, itemMenuInfo} from './Types/menuListTypes';
 import {banner} from './Types/bannersTypes';
 import FastImage from 'react-native-fast-image';
 
+
+// Storage для флипеера
+// import RNAsyncStorageFlipper from 'rn-async-storage-flipper';
+// import AsyncStorage from '@react-native-community/async-storage';
+// RNAsyncStorageFlipper(AsyncStorage);
+
 const Main: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -33,15 +39,13 @@ const Main: React.FC = (): JSX.Element => {
       // @ts-ignore
       const items: itemMenuInfo[] = r[1].payload;
       // @ts-ignore
-      const categories: categoriesInfo[] = r[2].payload;
-      // @ts-ignore
       const activeCategory: number = r[2].payload[0].id || 0;
 
       banners.forEach((b) => tasks.push(b.image));
 
       items
         .filter((item) => item.category_id === activeCategory)
-        .slice(0, 5)
+        .slice(0, 3)
         .forEach((i) => tasks.push(i.image ? i.image : ''));
 
       FastImage.preload(
@@ -56,13 +60,14 @@ const Main: React.FC = (): JSX.Element => {
     });
   }, []);
 
-  if (!loading) {
-    return <Text>Loading...</Text>;
-  }
+  // if (!loading) {
+  //   return <Text>Loading...</Text>;
+  // }
 
   return (
     <ErrorBoundary>
-      <NavigationContainer />
+      {!loading && <Text>Loading...</Text>}
+      {loading && <NavigationContainer />}
     </ErrorBoundary>
   );
 };

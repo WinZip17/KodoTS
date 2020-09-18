@@ -1,4 +1,4 @@
-import StyleSheet from 'react-native';
+import {StyleSheet} from 'react-native';
 import GlobalStyles from '../../Theme/Global';
 import {normalize} from '../../util/screen';
 import colors from '../../Theme/colors';

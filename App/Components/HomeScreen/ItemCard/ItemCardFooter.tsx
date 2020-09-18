@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../../Stores/reducers';
 import {styles} from './ItemCard.styles';
 import { itemMenuInfo } from "../../../Types/menuListTypes";
-import StringText from "../../ui/StringText";
+import StringText from "../../ui/StringText/StringText";
 
 type PropsTypes = {
   item: itemMenuInfo;
