@@ -1,6 +1,12 @@
 import {itemMenuInfo} from './menuListTypes';
-import { HIDE_CLEAR_CART_MODAL, HIDE_MODAL_CART_MODAL, SHOW_ADD_CART_MODAL, SHOW_CLEAR_CART_MODAL, SHOW_EDIT_CART_MODAL } from "../Stores/reducers/cartModal";
-import { CART_CLEAR } from '../Stores/reducers/cart';
+import {
+  HIDE_CLEAR_CART_MODAL,
+  HIDE_MODAL_CART_MODAL,
+  SHOW_ADD_CART_MODAL,
+  SHOW_CLEAR_CART_MODAL,
+  SHOW_EDIT_CART_MODAL,
+} from '../Stores/reducers/cartModal';
+import {CART_CLEAR} from '../Stores/reducers/cart';
 
 export interface cartModalState {
   item: null | itemMenuInfo;
@@ -19,7 +25,7 @@ export interface showEdit {
   type: typeof SHOW_EDIT_CART_MODAL;
   payload: {
     item: itemMenuInfo;
-    cartId: number;
+    cartId: number | null;
   };
 }
 

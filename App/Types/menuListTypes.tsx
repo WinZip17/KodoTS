@@ -1,4 +1,8 @@
-import { CHANGE_ACTIVE_CATEGORY, GET_CATEGORIES, GET_ITEMS } from "../Stores/reducers/menuList";
+import {
+  CHANGE_ACTIVE_CATEGORY,
+  GET_CATEGORIES,
+  GET_ITEMS,
+} from '../Stores/reducers/menuList';
 
 interface valueOptionsItem {
   name: string;
@@ -9,6 +13,7 @@ export interface optionsItem {
   values: valueOptionsItem[];
   id: number;
   name: string;
+  selectedValues: valueOptionsItem[];
 }
 
 export interface itemMenuInfo {
@@ -56,4 +61,7 @@ export interface selectActiveCategory {
   payload: number;
 }
 
-export type MenuListActionTypes = getItems | getCategories | selectActiveCategory;
+export type MenuListActionTypes =
+  | getItems
+  | getCategories
+  | selectActiveCategory;

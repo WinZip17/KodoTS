@@ -1,9 +1,12 @@
 import {
-  useSelector as useReduxSelector,
-  TypedUseSelectorHook,
-} from 'react-redux';
-import {RootState} from '../Stores/reducers';
-import { ADD_CART_DATA, CART_CLEAR, DELETE_CART_DATA, EDIT_ITEM_COUNT_CART, SET_CART_COUNT, SET_CART_DATA, SET_ITEMS } from '../Stores/reducers/cart';
+  ADD_CART_DATA,
+  CART_CLEAR,
+  DELETE_CART_DATA,
+  EDIT_ITEM_COUNT_CART,
+  SET_CART_COUNT,
+  SET_CART_DATA,
+  SET_ITEMS,
+} from '../Stores/reducers/cart';
 import {itemMenuInfo, optionsItem} from './menuListTypes';
 
 export interface cartInfoType {
@@ -63,6 +66,10 @@ export interface cartClear {
   type: typeof CART_CLEAR;
 }
 
+// export interface initCart {
+//   type: typeof setItems;
+// }
+//
 export type CartActionTypes =
   | setCartData
   | addItem
@@ -70,4 +77,5 @@ export type CartActionTypes =
   | setItemCount
   | editItemCount
   | setItems
+  // | initCart
   | cartClear;

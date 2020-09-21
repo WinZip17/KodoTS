@@ -26,6 +26,15 @@ const styles = StyleSheet.create({
     color: '#94878a',
     fontWeight: '400',
   },
+  stylesPrice: {
+    textAlign: 'right',
+    fontWeight: 'bold',
+    color: 'white',
+    flexBasis: '20%',
+  },
+  stylesOpacity: {
+    opacity: 0.8,
+  },
   p1: {
     fontSize: normalize(34),
   },
@@ -40,6 +49,12 @@ const styles = StyleSheet.create({
   },
   p5: {
     fontSize: normalize(26),
+  },
+  p6: {
+    fontSize: normalize(20),
+  },
+  p7: {
+    fontSize: normalize(12),
   },
 });
 

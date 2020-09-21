@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
 });
 
 type PropsTypes = {
+  onPress?: () => void;
   header?: string;
   style?: StyleProp<ViewStyle>;
   children: React.ReactNode;

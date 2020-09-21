@@ -17,8 +17,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../Stores/reducers';
 import * as Actions from '../../Stores/reducers/Actions';
 import {categoriesInfo} from '../../Types/menuListTypes';
-import HeaderTextName from '../ui/HeaderTextName';
 import {throttle} from 'lodash-es';
+import StringText from '../ui/StringText/StringText';
 
 type catOffsetsTypes = {
   [key: number]: number;
@@ -110,7 +110,11 @@ const HomeScreenComponent = () => {
                   }
                 }
               }}>
-              <HeaderTextName text={cat.name} />
+              <StringText
+                text={cat.name}
+                format="defaultHeader"
+                style={styles.categoriesHeader}
+              />
               {catItems.map((item) => {
                 return <ItemCard key={item.id} item={item} />;
               })}

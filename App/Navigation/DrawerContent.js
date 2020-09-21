@@ -54,7 +54,7 @@ const DrawerContentComponents = ({navigation}) => {
   ];
 
   const navigateToScreen = (route) => () => {
-    if (route === 'Cart' && Platform.OS === 'android' && user.id) {
+    if (route === 'Cart' && Platform.OS === 'android' && user && user.id) {
       navigation.navigate('CartScreen');
       return;
     }

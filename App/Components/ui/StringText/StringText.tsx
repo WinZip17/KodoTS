@@ -9,24 +9,28 @@ type format =
   | 'defaultHeader'
   | 'yellow'
   | 'comments'
+  | 'price'
+  | 'opacity'
   | 'green';
 
 type PropsType = {
-  text: string;
-  style?: TextStyle;
+  children?: React.ReactNode;
+  text?: string;
+  style?: TextStyle | TextStyle[];
   format?: format | format[];
-  fontSize?: 'p4' | 'p3' | 'p2' | 'p1';
+  fontSize?: 'p7' | 'p6' | 'p5' | 'p4' | 'p3' | 'p2' | 'p1';
   isUpperCase?: boolean;
 };
 
 const StringText = ({
+  children,
   text,
   style,
   format = 'default',
   fontSize,
   isUpperCase = false,
 }: PropsType) => {
-  const useStyles: TextStyle[] = [styles.stylesDefault];
+  let useStyles: TextStyle[] = [styles.stylesDefault];
 
   const setStyleFormat = (stylesFormat: string) => {
     switch (stylesFormat) {
@@ -44,6 +48,12 @@ const StringText = ({
         break;
       case 'green':
         useStyles.push(styles.stylesGreen);
+        break;
+      case 'price':
+        useStyles.push(styles.stylesPrice);
+        break;
+      case 'opacity':
+        useStyles.push(styles.stylesOpacity);
         break;
       default:
         useStyles.push(styles.stylesDefault);
@@ -71,17 +81,30 @@ const StringText = ({
       case 'p4':
         useStyles.push(styles.p4);
         break;
+      case 'p5':
+        useStyles.push(styles.p5);
+        break;
+      case 'p6':
+        useStyles.push(styles.p6);
+        break;
+      case 'p7':
+        useStyles.push(styles.p6);
+        break;
       default:
         useStyles.push(styles.p1);
     }
   }
 
-  if (style) {
+  if (style && !isArray(style)) {
     useStyles.push(style);
+  } else if (style && isArray(style)) {
+    useStyles = useStyles.concat(style);
   }
 
   return (
-    <Text style={useStyles}>{isUpperCase ? text.toUpperCase() : text}</Text>
+    <Text style={useStyles}>
+      {text ? (isUpperCase ? text.toUpperCase() : text) : children && children}
+    </Text>
   );
 };
 

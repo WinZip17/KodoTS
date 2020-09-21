@@ -44,18 +44,11 @@ export const styles = StyleSheet.create({
   basket: {
     width: normalize(261),
     height: normalize(182),
+    marginBottom: 30,
   },
   productBasket: {
     width: 23,
     height: 23,
-  },
-  productTotalText: {
-    color: '#fff',
-    fontSize: 20,
-  },
-  productDiscount: {
-    color: '#fff',
-    fontWeight: '300',
   },
   productBuy: {
     backgroundColor: colors.buttonMain,
@@ -82,16 +75,9 @@ export const styles = StyleSheet.create({
     color: '#ff0000',
     marginBottom: 8,
   },
-  productDeliveryText: {
-    color: '#ffcc00',
-    fontSize: 12,
-  },
   emptyText: {
-    display: 'flex',
     flexDirection: 'column',
     textAlign: 'center',
-    fontSize: 20,
-    color: colors.whiteText,
     opacity: 0.6,
     position: 'relative',
   },

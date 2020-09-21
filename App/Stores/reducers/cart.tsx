@@ -4,6 +4,7 @@ import {CartActionTypes, cartInfoType, CartState} from '../../Types/cartTypes';
 import {itemMenuInfo, optionsItem} from '../../Types/menuListTypes';
 import {findIndex} from 'lodash-es';
 import produce from 'immer';
+import AsyncStorage from '@react-native-community/async-storage';
 
 // Actions
 export const SET_CART_DATA = 'KodoTS/reducer/SET_CART_DATA';
@@ -13,6 +14,9 @@ export const SET_CART_COUNT = 'KodoTS/reducer/SET_CART_COUNT';
 export const EDIT_ITEM_COUNT_CART = 'KodoTS/reducer/EDIT_ITEM_COUNT_CART';
 export const SET_ITEMS = 'KodoTS/reducer/SET_ITEMS';
 export const CART_CLEAR = 'KodoTS/reducer/CART_CLEAR';
+export const INIT_CART = 'KodoTS/reducer/INIT_CART';
+
+const STORE_KEY = 'kodo_cart_v7';
 
 // Reducer
 const initialState: CartState = {
@@ -30,6 +34,7 @@ export default function cartReducer(
         idCounter =
           action.payload.items[action.payload.items.length - 1].id + 1;
       }
+      AsyncStorage.setItem(STORE_KEY, JSON.stringify(action.payload.items));
       return {...state, items: action.payload.items};
     case ADD_CART_DATA:
       item = action.payload.item;
@@ -44,15 +49,25 @@ export default function cartReducer(
         count,
         options,
       };
+      AsyncStorage.setItem(STORE_KEY, JSON.stringify([...state.items, i]));
       return {...state, items: [...state.items, i]};
 
     case DELETE_CART_DATA:
       const items = state.items.filter((i) => i.id !== action.payload);
+      AsyncStorage.setItem(STORE_KEY, JSON.stringify(items));
       return {...state, items};
 
     case SET_CART_COUNT:
       item = action.payload.item;
       const index = findIndex(state.items, (i) => i.item.id == item.id);
+      AsyncStorage.setItem(
+        STORE_KEY,
+        JSON.stringify(
+          produce(state.items, (draft) => {
+            draft[index].count = action.payload.count;
+          }),
+        ),
+      );
 
       return {
         ...state,
@@ -63,6 +78,7 @@ export default function cartReducer(
 
     case CART_CLEAR: {
       idCounter = 1;
+      AsyncStorage.setItem(STORE_KEY, JSON.stringify([]));
       return {...state, items: []};
     }
 
@@ -77,6 +93,7 @@ export default function cartReducer(
           return item;
         }
       });
+      AsyncStorage.setItem(STORE_KEY, JSON.stringify([...editItems]));
 
       return {...state, items: [...editItems]};
 
@@ -84,6 +101,15 @@ export default function cartReducer(
       return state;
   }
 }
+
+const readAsyncStore = () => {
+  return AsyncStorage.getItem(STORE_KEY).then((data) => {
+    if (data) {
+      return JSON.parse(data);
+    }
+    return [];
+  });
+};
 
 // Action Creators
 export const addItem = (
@@ -164,4 +190,14 @@ export const cartClear = (): ThunkAction<
   return dispatch({
     type: CART_CLEAR,
   });
+};
+
+export const initCart = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  CartActionTypes
+> => async (dispatch) => {
+  const items = await readAsyncStore();
+  return dispatch(setItems(items));
 };

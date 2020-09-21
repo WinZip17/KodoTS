@@ -8,5 +8,8 @@ export const styles = StyleSheet.create({
   categoriesWrap: {
     marginBottom: 10,
   },
+  categoriesHeader: {
+    paddingLeft: 15,
+  },
   scrollView: {},
 });

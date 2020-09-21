@@ -4,15 +4,9 @@ import ErrorBoundary from './Components/ErrorBoundary';
 import NavigationContainer from './Navigation/Container';
 import * as Actions from './Stores/reducers/Actions';
 import {Text} from 'react-native';
-import {categoriesInfo, itemMenuInfo} from './Types/menuListTypes';
+import {itemMenuInfo} from './Types/menuListTypes';
 import {banner} from './Types/bannersTypes';
 import FastImage from 'react-native-fast-image';
-
-
-// Storage для флипеера
-// import RNAsyncStorageFlipper from 'rn-async-storage-flipper';
-// import AsyncStorage from '@react-native-community/async-storage';
-// RNAsyncStorageFlipper(AsyncStorage);
 
 const Main: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -28,6 +22,7 @@ const Main: React.FC = (): JSX.Element => {
     dispatch(Actions.getLabelsList()),
     dispatch(Actions.getStreetsList()),
     dispatch(Actions.getLastOrder()),
+    dispatch(Actions.initCart()),
   ];
 
   useLayoutEffect(() => {

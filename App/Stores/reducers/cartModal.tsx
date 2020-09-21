@@ -1,7 +1,7 @@
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '.';
 import {cartModalState, cartModalTypes} from '../../Types/cartModalTypes';
-import {itemMenuInfo} from '../../Types/menuListTypes';
+import {itemMenuInfo, optionsItem} from '../../Types/menuListTypes';
 
 // Actions
 export const SHOW_ADD_CART_MODAL = 'KodoTS/reducer/SHOW_ADD_CART_MODAL';
@@ -41,7 +41,13 @@ export default function cartModalReducer(
         cartId: action.payload.cartId,
       };
     case HIDE_MODAL_CART_MODAL:
-      return {...state, showEdit: false, showAdd: false, item: null};
+      return {
+        ...state,
+        showEdit: false,
+        showAdd: false,
+        item: null,
+        cartId: null,
+      };
 
     default:
       return state;
@@ -62,7 +68,7 @@ export const showAdd = (
 
 export const showEdit = (
   item: itemMenuInfo,
-  cartId: number,
+  cartId: number | null,
 ): ThunkAction<void, RootState, unknown, cartModalTypes> => async (
   dispatch,
 ) => {

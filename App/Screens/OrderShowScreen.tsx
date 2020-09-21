@@ -4,9 +4,7 @@ import {Text} from 'react-native';
 const OrderShowScreen: React.FC = (): JSX.Element => {
   return (
     <>
-      <Text>
-          OrderShowScreen.
-      </Text>
+      <Text>OrderShowScreen.</Text>
     </>
   );
 };

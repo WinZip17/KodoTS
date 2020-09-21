@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Image, TouchableOpacity, Text, ImageProps} from 'react-native';
+import {StyleSheet, Image, TouchableOpacity, ImageProps} from 'react-native';
 import colors from '../../Theme/colors';
 import {normalize} from '../../util/screen';
+import StringText from './StringText/StringText';
 
 const styles = StyleSheet.create({
   ButtonImageWrapper: {
@@ -18,7 +19,6 @@ const styles = StyleSheet.create({
   ButtonText: {
     opacity: 0.6,
     color: colors.buttonMain,
-    fontSize: normalize(34),
     fontWeight: '300',
     textAlign: 'center',
   },
@@ -36,7 +36,7 @@ const ButtonImage = (props: propsTypes) => {
   return (
     <TouchableOpacity style={styles.ButtonImageWrapper} onPress={onPress}>
       <Image style={styles.icon} source={image} />
-      <Text style={styles.ButtonText}>{textButton}</Text>
+      <StringText style={styles.ButtonText} text={textButton} fontSize="p1" />
     </TouchableOpacity>
   );
 };

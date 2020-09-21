@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import StringText from './StringText/StringText';
 
 const styles = StyleSheet.create({
   circleOuter: {
@@ -68,7 +68,10 @@ const RadioButton = (props: PropsTypes): JSX.Element => {
             ]}>
             {data.value === valueState && <View style={styles.circleInner} />}
           </View>
-          <Text style={data.text ? orientation : ''}>{data.text}</Text>
+          <StringText
+            style={data.text ? orientation : ''}
+            text={data.text.toString()}
+          />
           {props.children}
         </View>
       </TouchableOpacity>

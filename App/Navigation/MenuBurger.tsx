@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, View, TouchableWithoutFeedback, StyleSheet} from 'react-native';
+import {useNavigation} from 'react-navigation-hooks';
 import icons from '../assets/icons';
 
 const styles = StyleSheet.create({
@@ -12,11 +13,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const MenuBurger: React.FC = ({navigation}: any): JSX.Element => {
+const MenuBurger: React.FC = (): JSX.Element => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.block}>
       <TouchableWithoutFeedback
-        onPress={navigation.toggleDrawer}
+        // @ts-ignore
+        onPress={() => navigation.toggleDrawer()}
         hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}>
         <Image source={icons.icBurger} style={styles.image} />
       </TouchableWithoutFeedback>
