@@ -15,15 +15,15 @@ type PropsType = {
   text: string;
   style?: TextStyle;
   format?: format | format[];
-  fontSize?: null | 'p4' | 'p3' | 'p2' | 'p1';
-  isUpperCase: boolean;
+  fontSize?: 'p4' | 'p3' | 'p2' | 'p1';
+  isUpperCase?: boolean;
 };
 
 const StringText = ({
   text,
   style,
   format = 'default',
-  fontSize = null,
+  fontSize,
   isUpperCase = false,
 }: PropsType) => {
   const useStyles: TextStyle[] = [styles.stylesDefault];
@@ -52,9 +52,7 @@ const StringText = ({
 
   if (format && typeof format === 'string') {
     setStyleFormat(format);
-  }
-
-  if (format && isArray(format)) {
+  } else if (format && isArray(format)) {
     format.forEach((i) => {
       setStyleFormat(i);
     });

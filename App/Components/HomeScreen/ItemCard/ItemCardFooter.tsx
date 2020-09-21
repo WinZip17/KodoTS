@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../Stores/reducers';
+import {View} from 'react-native';
 import {styles} from './ItemCard.styles';
-import { itemMenuInfo } from "../../../Types/menuListTypes";
-import StringText from "../../ui/StringText/StringText";
+import {itemMenuInfo} from '../../../Types/menuListTypes';
+import StringText from '../../ui/StringText/StringText';
 
 type PropsTypes = {
   item: itemMenuInfo;
@@ -25,11 +23,13 @@ const ItemCardFooter = ({item}: PropsTypes): JSX.Element => {
             />
           </View>
         )}
-        {!item.is_aquarium && <View style={styles.itemPrice}>
+        {!item.is_aquarium && (
+          <View style={styles.itemPrice}>
             <StringText text={`${item.price_int} \u20BD`} />
-        </View>}
+          </View>
+        )}
       </View>
-      <Text style={styles.itemDesc}>{item.desc}</Text>
+      <StringText format="comments" text={item.desc || ''} />
     </View>
   );
 };

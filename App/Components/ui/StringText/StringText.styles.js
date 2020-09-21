@@ -3,6 +3,7 @@ import {normalize} from '../../../util/screen';
 
 const styles = StyleSheet.create({
   stylesDefault: {
+    fontSize: normalize(32),
     color: '#ffffff',
     fontWeight: '300',
   },
