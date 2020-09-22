@@ -11,52 +11,40 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
-import AquariumPopup from './AquariumPopup';
-import styles from './OrderScreen.styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../Stores/reducers';
-import ListItem from '../ListItem';
-import Input from '../../Theme/Input';
-import icons from '../../assets/icons';
-import RenderDeliveryMethods from './RenderDeliveryMethods';
-import {orderType, tempOrderTypes} from '../../Types/ordersTypes';
-import RenderAddresses from './RenderAddresses';
+import {useNavigation} from 'react-navigation-hooks';
+
 import addMinutes from 'date-fns/addMinutes';
-import * as Actions from '../../Stores/reducers/Actions';
-
-import {payTinkoff, payWithApplePay} from '../../util/tinkoff';
-
 import map from 'lodash-es/map';
 import max from 'lodash-es/max';
 import size from 'lodash-es/size';
 
+import {orderType, tempOrderTypes} from '../../Types/ordersTypes';
+import {RootState} from '../../Stores/reducers';
+import * as Actions from '../../Stores/reducers/Actions';
+import {createOrder} from '../../Stores/reducers/orders';
+
+import icons from '../../assets/icons';
+import Buttons from '../../Theme/Buttons';
+import styles from './OrderScreen.styles';
+import Input from '../../Theme/Input';
+
+import ListItem from '../ListItem';
+import RenderDeliveryMethods from './RenderDeliveryMethods';
+import RenderAddresses from './RenderAddresses';
+import {handleAutocompleteHide} from '../../Stores/reducers/scroll';
+import AquariumPopup from './AquariumPopup';
+import {payTinkoff, payWithApplePay} from '../../util/tinkoff';
 import ReadyTimeOrder from './ReadyTimeOrder';
 import OrderTotals from '../SharedComponents/OrderTotals';
 import PaymentMethods from './PaymentMethods';
 import Checkbox from './Checkbox';
-import Buttons from '../../Theme/Buttons';
-import {createOrder} from '../../Stores/reducers/Actions';
-import withShowAutocompleteResult from '../HOC/withShowAutocompleteResult';
 
-type propsTypes = {
-  stopScrollParent: boolean;
-  hideAutocompleteResult: boolean;
-  handleAutocompleteShow: (stopScrollParent: boolean) => void;
-  handleAutocompleteHide: () => void;
-  navigation: any;
-};
-
-const OrderScreenComponent = (props: propsTypes): JSX.Element => {
-  const {
-    stopScrollParent,
-    hideAutocompleteResult,
-    handleAutocompleteShow,
-    handleAutocompleteHide,
-    navigation,
-  } = props;
-
+const OrderScreenComponent = (): JSX.Element => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  const stopScrollParent = useSelector((state: RootState) => state.scroll.stopScrollParent);
   const user = useSelector((state: RootState) => state.user.user);
   const items = useSelector((state: RootState) => state.cart.items);
   const settings = useSelector((state: RootState) => state.settings.settings);
@@ -296,7 +284,7 @@ const OrderScreenComponent = (props: propsTypes): JSX.Element => {
         scrollEnabled={!stopScrollParent}>
         <View
           onStartShouldSetResponder={() => {
-            handleAutocompleteHide();
+            dispatch(handleAutocompleteHide());
             return true;
           }}>
           {(!loggedIn || (user && !user.name) || (user && !user.email)) && (
@@ -354,13 +342,7 @@ const OrderScreenComponent = (props: propsTypes): JSX.Element => {
                 setDelivery={setDelivery}
               />
               {delivery === 'delivery' && (
-                <RenderAddresses
-                  order={order}
-                  setOrder={setOrder}
-                  handleAutocompleteShow={handleAutocompleteShow}
-                  handleAutocompleteHide={handleAutocompleteHide}
-                  hideAutocompleteResult={hideAutocompleteResult}
-                />
+                <RenderAddresses order={order} setOrder={setOrder} />
               )}
               {delivery === 'pickup' && (
                 <Text style={styles.deliveryDesc}>
@@ -438,4 +420,4 @@ const OrderScreenComponent = (props: propsTypes): JSX.Element => {
   );
 };
 
-export default withShowAutocompleteResult(OrderScreenComponent);
+export default OrderScreenComponent;

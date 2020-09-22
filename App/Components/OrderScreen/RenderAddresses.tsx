@@ -1,27 +1,20 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './OrderScreen.styles';
 import {Text, View} from 'react-native';
 import RadioButton from '../ui/RadioButton';
 import size from 'lodash-es/size';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {RootState} from '../../Stores/reducers';
-import * as Actions from '../../Stores/reducers/Actions';
 import Address from '../SharedComponents/Address';
 import {tempOrderTypes} from '../../Types/ordersTypes';
 
 type propsTypes = {
-  handleAutocompleteShow: (stopScrollParent: boolean) => void;
-  handleAutocompleteHide: () => void;
-  hideAutocompleteResult: boolean;
   order: tempOrderTypes;
   setOrder: (order: tempOrderTypes) => void;
 };
 
 const RenderAddresses = (props: propsTypes): JSX.Element => {
   const {
-    handleAutocompleteShow,
-    handleAutocompleteHide,
-    hideAutocompleteResult,
     order,
     setOrder,
   } = props;
@@ -30,11 +23,7 @@ const RenderAddresses = (props: propsTypes): JSX.Element => {
 
   if (!addresses || size(addresses) == 0) {
     return (
-      <Address
-        handleAutocompleteShow={handleAutocompleteShow}
-        handleAutocompleteHide={handleAutocompleteHide}
-        hideAutocompleteResult={hideAutocompleteResult}
-      />
+      <Address />
     );
   }
 
@@ -71,11 +60,7 @@ const RenderAddresses = (props: propsTypes): JSX.Element => {
       />
 
       {order.address_id === 'new' && (
-        <Address
-          handleAutocompleteShow={handleAutocompleteShow}
-          handleAutocompleteHide={handleAutocompleteHide}
-          hideAutocompleteResult={hideAutocompleteResult}
-        />
+        <Address />
       )}
     </View>
   );

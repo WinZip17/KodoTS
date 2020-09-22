@@ -3,7 +3,13 @@ import {Text, TextInput, StyleSheet} from 'react-native';
 import Autocomplete from 'react-native-autocomplete-input';
 import {streetTypes} from '../../Types/streetsTypes';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Input from "../../Theme/Input";
+import Input from '../../Theme/Input';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../Stores/reducers';
+import {
+  handleAutocompleteHide,
+  handleAutocompleteShow,
+} from '../../Stores/reducers/scroll';
 
 const styles = StyleSheet.create({
   autocompleteWrap: {
@@ -59,25 +65,19 @@ type propsType = {
   setAddress: (street_name: string) => void;
   streetList: streetTypes[];
   placeholder: string;
-  onContainerShow: (show: boolean) => void;
-  onContainerHide: () => void;
-  showAutocompleteResult: boolean;
 };
 
 const AutocompleteCustom = (props: propsType) => {
-  const {
-    value,
-    sortFn,
-    setAddress,
-    streetList,
-    placeholder,
-    onContainerShow,
-    onContainerHide,
-    showAutocompleteResult,
-  } = props;
+  const {value, sortFn, setAddress, streetList, placeholder} = props;
 
   const [pressed, setPressed] = useState(false);
   const [query, setQuery] = useState('');
+
+  const dispatch = useDispatch();
+
+  const AutocompleteResult = useSelector(
+    (state: RootState) => state.scroll.hideAutocompleteResult,
+  );
 
   useEffect(() => {
     setQuery(value);
@@ -89,6 +89,14 @@ const AutocompleteCustom = (props: propsType) => {
   if (emptyConatainer) {
     streets.push({name: 'Ваш адрес находится вне зоны доставки', id: 0});
   }
+
+  const onContainerShow = (autocompleteValue: boolean) => {
+    dispatch(handleAutocompleteShow(autocompleteValue));
+  };
+
+  const onContainerHide = () => {
+    dispatch(handleAutocompleteHide());
+  };
 
   return (
     <Autocomplete
@@ -114,7 +122,7 @@ const AutocompleteCustom = (props: propsType) => {
               styles.inputBox,
               {
                 borderBottomColor:
-                  emptyConatainer && !showAutocompleteResult
+                  emptyConatainer && !AutocompleteResult
                     ? '#ff0000'
                     : '#ffcc00',
                 backgroundColor: Colors.backgroundColor,

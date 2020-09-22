@@ -25,19 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-
-type propsTypes = {
-  handleAutocompleteShow: (stopScrollParent: boolean) => void;
-  handleAutocompleteHide: () => void;
-  hideAutocompleteResult: boolean;
-};
-
-const Address = (props: propsTypes) => {
-  const {
-    handleAutocompleteShow,
-    handleAutocompleteHide,
-    hideAutocompleteResult,
-  } = props;
+const Address = () => {
   const dispatch = useDispatch();
 
   const streets = useSelector((state: RootState) => state.streets.streets);
@@ -54,9 +42,6 @@ const Address = (props: propsTypes) => {
             streetList={streets}
             sortFn={sortFn}
             placeholder="Улица"
-            onContainerShow={handleAutocompleteShow}
-            onContainerHide={handleAutocompleteHide}
-            showAutocompleteResult={hideAutocompleteResult}
             value={address.street_name}
           />
         </View>

@@ -14,6 +14,7 @@ const CartClearModal: React.FC = (): JSX.Element => {
     <ConfirmModal
       isVisible={showClear}
       onYes={() => {
+        dispatch(Actions.cartClear());
         dispatch(Actions.hideClear());
       }}
       onDismiss={() => dispatch(Actions.hideClear())}>

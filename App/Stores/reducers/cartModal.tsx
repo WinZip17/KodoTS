@@ -1,7 +1,7 @@
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '.';
 import {cartModalState, cartModalTypes} from '../../Types/cartModalTypes';
-import {itemMenuInfo, optionsItem} from '../../Types/menuListTypes';
+import {itemMenuInfo} from '../../Types/menuListTypes';
 
 // Actions
 export const SHOW_ADD_CART_MODAL = 'KodoTS/reducer/SHOW_ADD_CART_MODAL';

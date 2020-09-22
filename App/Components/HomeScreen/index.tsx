@@ -53,7 +53,7 @@ const HomeScreenComponent = () => {
   };
 
   const onPageScroll = throttle((e) => {
-    let activeCategoryId = categories[0].id;
+    let activeCategoryId = categories.length > 0 ? categories[0].id : 0;
     let offset: number = e.nativeEvent.contentOffset.y;
     if (sorted) {
       for (let [key, value] of sorted) {
