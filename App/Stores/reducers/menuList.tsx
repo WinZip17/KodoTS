@@ -1,13 +1,15 @@
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '.';
 import client from '../../Services/axiosSettinsg';
-import {MenuListActionTypes, MenuListState} from '../../Types/menuListTypes';
+import {catOffsetsTypes, MenuListActionTypes, MenuListState} from '../../Types/menuListTypes';
 import {Action} from 'redux';
 
 // Actions
 export const GET_ITEMS = 'KodoTS/reducer/GET_ITEMS';
 export const GET_CATEGORIES = 'KodoTS/reducer/GET_CATEGORIES';
 export const CHANGE_ACTIVE_CATEGORY = 'KodoTS/reducer/CHANGE_ACTIVE_CATEGORY';
+export const SET_SORTED = 'KodoTS/reducer/SET_SORTED';
+export const SET_CAT_OFFSET = 'KodoTS/reducer/SET_CAT_OFFSET';
 
 // Reducer
 const initialState: MenuListState = {
@@ -15,6 +17,8 @@ const initialState: MenuListState = {
   activeCategory: 999,
   items: [],
   categories: [],
+  sorted: [],
+  catOffsets: {},
 };
 
 export default function MenuListReducer(
@@ -25,7 +29,11 @@ export default function MenuListReducer(
     case GET_ITEMS:
       return {...state, items: action.payload};
     case GET_CATEGORIES:
-      return {...state, categories: action.payload, activeCategory: action.payload[0].id};
+      return {
+        ...state,
+        categories: action.payload,
+        activeCategory: action.payload[0].id,
+      };
     case CHANGE_ACTIVE_CATEGORY:
       return {...state, activeCategory: action.payload};
     default:
@@ -74,5 +82,23 @@ export const selectActiveCategory = (
   return dispatch({
     type: CHANGE_ACTIVE_CATEGORY,
     payload: id,
+  });
+};
+
+export const setSorted = (
+  sorted: number[][],
+): ThunkAction<void, RootState, unknown, MenuListActionTypes> => (dispatch) => {
+  return dispatch({
+    type: SET_SORTED,
+    payload: sorted,
+  });
+};
+
+export const setCatOffsets = (
+  catOffset: catOffsetsTypes,
+): ThunkAction<void, RootState, unknown, MenuListActionTypes> => (dispatch) => {
+  return dispatch({
+    type: SET_CAT_OFFSET,
+    payload: catOffset,
   });
 };

@@ -2,15 +2,16 @@ import {
   LayoutChangeEvent,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  SafeAreaView,
   ScrollView,
   View,
+  VirtualizedList,
 } from 'react-native';
 import Banners from './Banners';
 import CategoryList from './CategoryList';
 import filter from 'lodash-es/filter';
 import matches from 'lodash-es/matches';
-import ItemCard from './ItemCard';
-import Index from '../SharedComponents/ItemOptions/';
+import ItemOptions from '../SharedComponents/ItemOptions/';
 import React, {useRef, useState} from 'react';
 import {styles} from './HomeScreenComponent.styles';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,11 +19,7 @@ import {RootState} from '../../Stores/reducers';
 import * as Actions from '../../Stores/reducers/Actions';
 import {categoriesInfo} from '../../Types/menuListTypes';
 import {throttle} from 'lodash-es';
-import StringText from '../ui/StringText/StringText';
-
-type catOffsetsTypes = {
-  [key: number]: number;
-};
+import CategoryItems from './CategoryItems';
 
 const HomeScreenComponent = () => {
   const dispatch = useDispatch();
@@ -34,8 +31,10 @@ const HomeScreenComponent = () => {
     (state: RootState) => state.menuList.activeCategory,
   );
 
-  const [sorted, setSorted] = useState<number[][]>([]);
-  const [catOffsets, setCatOffsets] = useState<catOffsetsTypes>({});
+  const sorted = useSelector((state: RootState) => state.menuList.sorted);
+  const catOffsets = useSelector(
+    (state: RootState) => state.menuList.catOffsets,
+  );
 
   const [activePressCategory, setActivePressCategory] = useState<number | null>(
     null,
@@ -78,51 +77,94 @@ const HomeScreenComponent = () => {
     onPageScroll(e);
   };
 
+  const getItem = (data: categoriesInfo[], index: number) => {
+    const catItems = filter(items, matches({category_id: data[index].id}));
+    return {
+      catItems,
+      id: data[index].id,
+      name: data[index].name,
+    };
+  };
+
+  const getItemCount = (data: categoriesInfo[]) => {
+    if (data) {
+      return data.length;
+    }
+    return 1;
+  };
+
+  const test = (e: any) => {
+    console.log(e)
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView
-        stickyHeaderIndices={[1]}
-        ref={scrollViewRef}
-        onScroll={handleScroll}>
-        <Banners />
+      <SafeAreaView>
         <CategoryList
           onChange={scrollTo}
           activeCategoryId={activeCategory}
           activePressCategory={activePressCategory}
         />
-        {categories.map((cat) => {
-          const catItems = filter(items, matches({category_id: cat.id}));
-          return (
-            <View
-              style={styles.categoriesWrap}
-              key={cat.id}
-              onLayout={(event: LayoutChangeEvent) => {
-                const newCatOffsets = catOffsets;
-                catOffsets[cat.id] = event.nativeEvent.layout.y;
-                setCatOffsets(newCatOffsets);
-                if (sorted.length === 0) {
-                  if (Object.keys(catOffsets).length === categories.length) {
-                    setSorted(
-                      Object.entries(catOffsets)
-                        .sort((a, b) => a[1] - b[1])
-                        .map((arr) => [Number(arr[0]), arr[1]]),
-                    );
-                  }
-                }
-              }}>
-              <StringText
-                text={cat.name}
-                format="defaultHeader"
-                style={styles.categoriesHeader}
-              />
-              {catItems.map((item) => {
-                return <ItemCard key={item.id} item={item} />;
-              })}
-            </View>
-          );
-        })}
-      </ScrollView>
-      <Index />
+        <VirtualizedList
+          // stickyHeaderIndices={[1]}
+          ref={scrollViewRef}
+          onScroll={handleScroll}
+          removeClippedSubviews
+          ListHeaderComponent={() => {
+            return (
+              <>
+                <Banners />
+                <CategoryList
+                  onChange={scrollTo}
+                  activeCategoryId={activeCategory}
+                  activePressCategory={activePressCategory}
+                />
+              </>
+            );
+          }}
+          data={categories}
+          initialNumToRender={1}
+          getChildContext={test}
+          renderItem={({item}) => <CategoryItems item={item} />}
+          keyExtractor={(item, index) => {
+            return (item.id + index).toString();
+          }}
+          getItemCount={getItemCount}
+          getItem={getItem}
+        />
+        {/*{categories.map((cat) => {*/}
+        {/*  const catItems = filter(items, matches({category_id: cat.id}));*/}
+        {/*  return (*/}
+        {/*    <View*/}
+        {/*      style={styles.categoriesWrap}*/}
+        {/*      key={cat.id}*/}
+        {/*      onLayout={(event: LayoutChangeEvent) => {*/}
+        {/*        const newCatOffsets = catOffsets;*/}
+        {/*        catOffsets[cat.id] = event.nativeEvent.layout.y;*/}
+        {/*        setCatOffsets(newCatOffsets);*/}
+        {/*        if (sorted.length === 0) {*/}
+        {/*          if (Object.keys(catOffsets).length === categories.length) {*/}
+        {/*            setSorted(*/}
+        {/*              Object.entries(catOffsets)*/}
+        {/*                .sort((a, b) => a[1] - b[1])*/}
+        {/*                .map((arr) => [Number(arr[0]), arr[1]]),*/}
+        {/*            );*/}
+        {/*          }*/}
+        {/*        }*/}
+        {/*      }}>*/}
+        {/*      <StringText*/}
+        {/*        text={cat.name}*/}
+        {/*        format="defaultHeader"*/}
+        {/*        style={styles.categoriesHeader}*/}
+        {/*      />*/}
+        {/*      {catItems.map((item) => {*/}
+        {/*        return <ItemCard key={item.id} item={item} />;*/}
+        {/*      })}*/}
+        {/*    </View>*/}
+        {/*  );*/}
+        {/*})}*/}
+      </SafeAreaView>
+      <ItemOptions />
     </View>
   );
 };

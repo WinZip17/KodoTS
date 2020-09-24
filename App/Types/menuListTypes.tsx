@@ -2,6 +2,8 @@ import {
   CHANGE_ACTIVE_CATEGORY,
   GET_CATEGORIES,
   GET_ITEMS,
+  SET_CAT_OFFSET,
+  SET_SORTED,
 } from '../Stores/reducers/menuList';
 
 interface valueOptionsItem {
@@ -39,11 +41,17 @@ export interface categoriesInfo {
   data: itemMenuInfo[];
 }
 
+export interface catOffsetsTypes {
+  [key: number]: number;
+};
+
 export interface MenuListState {
   loading: boolean;
   items: itemMenuInfo[];
   activeCategory: number;
   categories: categoriesInfo[];
+  sorted: number[][];
+  catOffsets: catOffsetsTypes;
 }
 
 export interface getItems {
@@ -61,7 +69,19 @@ export interface selectActiveCategory {
   payload: number;
 }
 
+export interface setSorted {
+  type: typeof SET_SORTED;
+  payload: number[][];
+}
+
+export interface setCatOffsets {
+  type: typeof SET_CAT_OFFSET;
+  payload: catOffsetsTypes;
+}
+
 export type MenuListActionTypes =
   | getItems
   | getCategories
+  | setCatOffsets
+  | setSorted
   | selectActiveCategory;

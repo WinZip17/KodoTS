@@ -12,4 +12,15 @@ export const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   scrollView: {},
+  item: {
+    backgroundColor: '#f9c2ff',
+    height: 150,
+    justifyContent: 'center',
+    marginVertical: 8,
+    marginHorizontal: 16,
+    padding: 20,
+  },
+  title: {
+    fontSize: 32,
+  },
 });

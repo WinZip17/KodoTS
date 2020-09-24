@@ -21,21 +21,22 @@ type PropsTypes = {
 
 const CategoryList = (props: PropsTypes): JSX.Element => {
   const {activeCategoryId, onChange, activePressCategory} = props;
+
   const categories = useSelector(
     (state: RootState) => state.menuList.categories,
   );
-  // const flatListRef = useRef<FlatList<categoriesInfo>>(null);
-  //
-  // useEffect(() => {
-  //   if (categories && activeCategoryId && !activePressCategory) {
-  //     const index: number = categories.findIndex(
-  //       (item) => item.id === activeCategoryId,
-  //     );
-  //     if (flatListRef.current !== null && index !== -1) {
-  //       flatListRef.current.scrollToIndex({animated: true, index});
-  //     }
-  //   }
-  // }, [activeCategoryId, activePressCategory, categories]);
+  const flatListRef = useRef<FlatList<categoriesInfo>>(null);
+
+  useEffect(() => {
+    if (categories && activeCategoryId && !activePressCategory) {
+      const index: number = categories.findIndex(
+        (item) => item.id === activeCategoryId,
+      );
+      if (flatListRef.current !== null && index !== -1) {
+        flatListRef.current.scrollToIndex({animated: true, index});
+      }
+    }
+  }, [activeCategoryId, activePressCategory, categories]);
 
   if (!categories) {
     return <View />;
@@ -44,7 +45,7 @@ const CategoryList = (props: PropsTypes): JSX.Element => {
   return (
     <View>
       <FlatList
-        // ref={flatListRef}
+        ref={flatListRef}
         showsHorizontalScrollIndicator={false}
         style={[styles.flatList, {paddingTop: 10}]}
         horizontal
